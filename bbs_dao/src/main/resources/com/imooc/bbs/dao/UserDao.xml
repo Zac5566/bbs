@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.bbs.dao.UserDao">
+    <resultMap id="userRM" type="User">
+        <id property="id" column="id" javaType="Long"/>
+        <result property="username" column="username" javaType="String"/>
+        <result property="password" column="password" javaType="String"/>
+        <result property="email" column="email" javaType="String"/>
+        <result property="userStatus" column="userStatus" javaType="Integer"/>
+    </resultMap>
+    <insert id="insert" parameterType="User">
+        insert user values(null,#{username},#{password},#{email},#{userStatus})
+    </insert>
+    <delete id="delete" parameterType="Long">
+        delete from user where id=#{id}
+    </delete>
+    <update id="update" parameterType="User">
+        update user set userStatus=#{userStatus} where id=#{id}
+    </update>
+    <select id="selectOne" parameterType="Long" resultMap="userRM">
+        select * from user where id=#{id}
+    </select>
+    <select id="selectByNameAndPassword" resultMap="userRM">
+        select * from user where username=#{username} and password=#{password}
+    </select>
+    <select id="selectAll" resultMap="userRM">
+        select * from user
+    </select>
+</mapper>

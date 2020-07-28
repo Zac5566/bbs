@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.bbs.dao.PostDao">
+    <resultMap id="postRM" type="Post">
+        <id property="id" column="id" javaType="Long"/>
+        <result property="username" column="username" javaType="String"/>
+        <result property="title" column="title" javaType="String"/>
+        <result property="category" column="category" javaType="String"/>
+        <result property="content" column="content" javaType="String"/>
+        <result property="tag" column="tag" javaType="String"/>
+        <result property="createTime" column="create_time" javaType="Date"/>
+    </resultMap>
+    <insert id="insert" parameterType="Post">
+        insert post values(null,#{username},#{title},#{category},#{content},#{tag},#{createTime})
+    </insert>
+    <delete id="delete" parameterType="Long">
+        delete from post where id=#{id}
+    </delete>
+    <select id="selectById" resultMap="postRM">
+        select * from post where id=#{id}
+    </select>
+    <select id="selectAll" resultMap="postRM">
+        select * from post order by id desc
+    </select>
+    <select id="selectByTag" resultMap="postRM">
+        select * from post where tag=#{tag}
+    </select>
+</mapper>
